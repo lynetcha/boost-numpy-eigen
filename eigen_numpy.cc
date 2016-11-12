@@ -8,12 +8,16 @@ namespace np = boost::numpy;
 
 using namespace Eigen;
 
+typedef Matrix<short, Dynamic, 1> VectorXs;
+typedef Matrix<unsigned char, Dynamic, Dynamic> MatrixXs;
 template <typename SCALAR>
 struct NumpyEquivalentType {};
 
 template <> struct NumpyEquivalentType<double> {enum { type_code = NPY_DOUBLE };};
 template <> struct NumpyEquivalentType<int> {enum { type_code = NPY_INT };};
-template <> struct NumpyEquivalentType<float> {enum { type_code = NPY_FLOAT };};
+template <> struct NumpyEquivalentType<unsigned char> {enum { type_code = NPY_UINT8 };};
+template <> struct NumpyEquivalentType<short> {enum { type_code = NPY_INT16 };};
+template <> struct NumpyEquivalentType<float> {enum { type_code = NPY_FLOAT32 };};
 template <> struct NumpyEquivalentType<std::complex<double> > {enum { type_code = NPY_CDOUBLE };};
 
 template <typename SourceType, typename DestType >
@@ -223,6 +227,9 @@ void SetupEigenConverters() {
   EIGEN_MATRIX_CONVERTER(Matrix3d);
   EIGEN_MATRIX_CONVERTER(Matrix4f);
   EIGEN_MATRIX_CONVERTER(Matrix4d);
+  EIGEN_MATRIX_CONVERTER(MatrixXd);
+  EIGEN_MATRIX_CONVERTER(MatrixXf);
+  EIGEN_MATRIX_CONVERTER(MatrixXs);
 
   EIGEN_MATRIX_CONVERTER(Vector2f);
   EIGEN_MATRIX_CONVERTER(Vector3f);
@@ -230,10 +237,11 @@ void SetupEigenConverters() {
   EIGEN_MATRIX_CONVERTER(Vector2d);
   EIGEN_MATRIX_CONVERTER(Vector3d);
   EIGEN_MATRIX_CONVERTER(Vector4d);
+  EIGEN_MATRIX_CONVERTER(VectorXs);
+  EIGEN_MATRIX_CONVERTER(VectorXf);
 
   MAT_CONV(2, 3, double);
   MAT_CONV(X, 3, double);
-  MAT_CONV(X, X, double);
   MAT_CONV(X, 1, double);
   MAT_CONV(1, 4, double);
   MAT_CONV(1, X, double);

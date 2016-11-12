@@ -9,7 +9,7 @@ namespace bp = boost::python;
 
 template <typename M>
 bool acceptMatrix(M m) {
-    return (m(0,0) == 1) && (m(0,1) == 2) && (m(0,2) == 3) 
+    return (m(0,0) == 1) && (m(0,1) == 2) && (m(0,2) == 3)
         && (m(1,0) == 4) && (m(1,1) == 5) && (m(1,2) == 6);
 }
 
@@ -67,6 +67,7 @@ BOOST_PYTHON_MODULE(test_eigen_numpy_mod) {
   bp::def("acceptMatrix_X3d_cref", acceptMatrix< Eigen::Matrix<double,X,3> const &>);
   bp::def("acceptMatrix_2Xd_cref", acceptMatrix< Eigen::Matrix<double,2,X> const &>);
   bp::def("acceptMatrix_XXd_cref", acceptMatrix< Eigen::Matrix<double,X,X> const &>);
+  bp::def("acceptMatrix_XXf_cref", acceptMatrix< Eigen::Matrix<float,X,X> const &>);
   bp::def("acceptVector_41d_cref", acceptVector< Eigen::Matrix<double,4,1> const &>);
   bp::def("acceptVector_X1d_cref", acceptVector< Eigen::Matrix<double,X,1> const &>);
   bp::def("acceptVector_14d_cref", acceptVector< Eigen::Matrix<double,1,4> const &>);
